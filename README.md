@@ -1,2 +1,2 @@
-# teachy_backend
- Prototype backend application for managing grades, coursework, and academic activities in educational institutions.
+# teachy_classroom
+ Prototype application for managing grades, coursework, and academic activities in educational institutions

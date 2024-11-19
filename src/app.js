@@ -4,6 +4,7 @@ import { notFound } from "./middlewares/error/notFound.js";
 import connectDatabase from "./config/database.js";
 import routes from "./routes/index.js";
 import dotenv from "dotenv";
+import errorHandler from "./middlewares/error/errorHandler.js";
 dotenv.config();
 
 // app config
@@ -18,10 +19,11 @@ app.use(cors());
 app.use(bodyParser());
 
 // entry point
-app.use("/api", routes);
+app.use("/api/v1", routes);
 
-// not found
-app.use(notFound);
+// error handlers
+app.use(notFound); // 404
+app.use(errorHandler); // error
 
 // database
 connectDatabase({ MONGODB_URI: process.env.MONGODB_URI });

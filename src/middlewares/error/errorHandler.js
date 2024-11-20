@@ -1,21 +1,18 @@
-import CustomError from "./CustomError.js";
-
 const errorHandler = (err, req, res, next) => {
-  if (err instanceof CustomError) {
-    return res.status(err.statusCode).json({
+  if (err.isJoi) {
+    return res.status(400).json({
       error: {
-        message: err.message,
-        statusCode: err.statusCode,
+        message: err.details[0]?.message || "Validation error",
+        statusCode: 400,
+        details: err.details || [],
       },
     });
   }
 
-  return res.status(500).json({
+  return res.status(err.statusCode || 500).json({
     error: {
-      message: "Internal Server Error",
-      statusCode: 500,
+      message: err.message || "Internal Server Error",
+      statusCode: err.statusCode || 500,
     },
   });
 };
-
-export default errorHandler;

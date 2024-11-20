@@ -2,7 +2,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.isJoi) {
     return res.status(400).json({
       error: {
-        message: err.details[0]?.message || "Validation error",
+        message: "Joi Validation Error",
         statusCode: 400,
         details: err.details || [],
       },
@@ -16,3 +16,5 @@ const errorHandler = (err, req, res, next) => {
     },
   });
 };
+
+export default errorHandler;
